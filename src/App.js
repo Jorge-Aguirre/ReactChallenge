@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { RiskSelector } from './components/risk-selector/risk-selector.component';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      riskValues: [...Array(10).keys()],
+    }
+  }
+
+  selectRisk(risk) {
+    console.log(risk);
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <div className="advisor">
+          <div className="title">
+            <h1>Financial Advisor</h1>
+          </div>
+        </div>
+        <RiskSelector
+          riskValues={this.state.riskValues} 
+          onClick={(i) => this.selectRisk(i)}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
