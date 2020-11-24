@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import { RiskSelector } from './components/risk-selector/risk-selector.component';
-import { RecomendedPortfolio } from './components/recommended-portfolio/recomended-portfolio.component';
+import { Switch, Route } from 'react-router-dom';
+import { SelectRiskPage } from './pages/select-risk.component';
+import { RebalanceInvestmentsPage } from './pages/rebalance-investments.component';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class App extends React.Component {
     }
   }
 
-  selectRisk(risk) {
+  selectRisk = risk => {
     this.setState({
       selectedRisk: risk
     });
@@ -27,14 +28,20 @@ class App extends React.Component {
             <h1>Financial Advisor</h1>
           </div>
         </div>
-        <div className='content'>
-          <RiskSelector
-            riskValues={this.state.riskValues}
-            selectedRisk={this.state.selectedRisk}
-            onClick={(i) => this.selectRisk(i+1)}
-          />
-          <RecomendedPortfolio selectedRisk={this.state.selectedRisk} />
-        </div>
+        <Switch>
+          <Route 
+            exact path='/' 
+            render={props => 
+              <SelectRiskPage 
+                {...props} 
+                riskValues={this.state.riskValues} 
+                selectedRisk={this.state.selectedRisk}
+                handleClick={this.selectRisk}
+              />} />
+          <Route exact path='/rebalance' component={RebalanceInvestmentsPage} />
+        </Switch>
+
+
       </div>
     );
   }
