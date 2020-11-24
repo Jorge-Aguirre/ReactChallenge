@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { RiskSelector } from './components/risk-selector/risk-selector.component';
+import { RecomendedPortfolio } from './components/recommended-portfolio/recomended-portfolio.component';
 
 class App extends React.Component {
   constructor(props) {
@@ -8,11 +9,14 @@ class App extends React.Component {
 
     this.state = {
       riskValues: [...Array(10).keys()],
+      selectedRisk: null,
     }
   }
 
   selectRisk(risk) {
-    console.log(risk);
+    this.setState({
+      selectedRisk: risk
+    });
   }
 
   render() {
@@ -23,10 +27,14 @@ class App extends React.Component {
             <h1>Financial Advisor</h1>
           </div>
         </div>
-        <RiskSelector
-          riskValues={this.state.riskValues} 
-          onClick={(i) => this.selectRisk(i)}
-        />
+        <div className='content'>
+          <RiskSelector
+            riskValues={this.state.riskValues}
+            selectedRisk={this.state.selectedRisk}
+            onClick={(i) => this.selectRisk(i+1)}
+          />
+          <RecomendedPortfolio selectedRisk={this.state.selectedRisk} />
+        </div>
       </div>
     );
   }

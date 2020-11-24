@@ -17,6 +17,10 @@
   font-size: small;
 }
 
+.risk.selected {
+  transform: scale(1.4);
+}
+
 .risk:hover {
   transform: scale(1.25);
 }

@@ -4,12 +4,13 @@ import './risk-selector.styles.css';
 export const RiskSelector = (props) => (
   <div className="risk-selector">
     Please select a Risk Level for your Investment Portfolio
+    <h5>Risk Level Selected: {props.selectedRisk}</h5>
     <ul>
       {
         props.riskValues.map(risk => 
           <Badge
             key={risk+1}
-            className="risk" 
+            className={`${(props.selectedRisk===risk+1) ? 'selected' : ''} risk`}
             color={Colors.WARNING}
             onClick={() => props.onClick(risk)}
           >
