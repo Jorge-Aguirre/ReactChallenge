@@ -11,6 +11,7 @@ class App extends React.Component {
     this.state = {
       riskValues: [...Array(10).keys()],
       selectedRisk: null,
+      isDonutChartViewSelected: false
     }
   }
 
@@ -18,6 +19,12 @@ class App extends React.Component {
     this.setState({
       selectedRisk: risk
     });
+  }
+
+  swithToDonutChart = () => {
+    this.setState({
+      isDonutChartViewSelected: !this.state.isDonutChartViewSelected
+    })
   }
 
   render() {
@@ -36,7 +43,9 @@ class App extends React.Component {
                 {...props} 
                 riskValues={this.state.riskValues} 
                 selectedRisk={this.state.selectedRisk}
+                isDonutChartViewSelected={this.state.isDonutChartViewSelected}
                 handleClick={this.selectRisk}
+                swithToDonutChart={this.swithToDonutChart}
               />} />
           <Route exact path='/rebalance' component={RebalanceInvestmentsPage} />
         </Switch>
