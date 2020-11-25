@@ -2,7 +2,10 @@ import React from 'react';
 import { Button, Colors } from 'react-foundation';
 import data from '../data/ideal-risk-balance';
 import { connect } from 'react-redux';
-import { setIdealConfig } from '../redux/rebalance/rebalance.actions';
+import { setIdealConfig, setCurrentBonds, setCurrentLargeCap,
+         setCurrentMidCap, setCurrentForeign, setCurrentSmallCap,
+         updateValues } from '../redux/rebalance/rebalance.actions';
+import BalanceValues from '../components/balance-values/balance-values.component';
 
 import './rebalance-investments.styles.css';
 
@@ -15,81 +18,88 @@ class RebalanceInvestmentsPage extends React.Component {
     setIdealConfig(filteredData);
   }
 
-  handleBlur = event => {
-    switch (event.target.dataset.field) {
-      case 'Bonds':
-        this.setState(prevState => ({
-          current: {
-            ...prevState.current,
-            bonds: event.target.value
-          }
-        }));
-        break;
-      case 'LargeCap':
-        this.setState(prevState => ({
-          current: {
-            ...prevState.current,
-            largeCap: event.target.value
-          }
-        }));
-        break;
-      case 'MidCap':
-        this.setState(prevState => ({
-          current: {
-            ...prevState.current,
-            midCap: event.target.value
-          }
-        }));
-        break;
-      case 'Foreign':
-        this.setState(prevState => ({
-          current: {
-            ...prevState.current,
-            foreign: event.target.value
-          }
-        }));
-        break;
-      case 'SmallCap': {
-        this.setState(prevState => ({
-          current: {
-            ...prevState.current,
-            smallCap: event.target.value
-          }
-        }));
-        break;
-      }
-    }
+  handleBondsBlur = event => {
+    const { setCurrentBonds } = this.props;
+
+    setCurrentBonds(event.target.value);
+  }
+  handleLargeCapBlur = event => {
+    const { setCurrentLargeCap } = this.props;
+
+    setCurrentLargeCap(event.target.value);
+  }
+  handleMidCapBlur = event => {
+    const { setCurrentMidCap } = this.props;
+
+    setCurrentMidCap(event.target.value);
+  }
+  handleForeignBlur = event => {
+    const { setCurrentForeign } = this.props;
+
+    setCurrentForeign(event.target.value);
+  }
+  handleSmallCapBlur = event => {
+    const { setCurrentSmallCap } = this.props;
+
+    setCurrentSmallCap(event.target.value);
   }
 
-  areFieldsFilled = () => {
-    /*
-    return this.state.current.bonds.length 
-      && this.state.current.largeCap.length
-      && this.state.current.midCap.length
-      && this.state.current.foreign.length
-      && this.state.current.smallCap.length 
-      */
+  areCurrentFieldsFilled = () => {
+    return this.props.bonds.current.length
+      && this.props.largeCap.current.length
+      && this.props.midCap.current.length
+      && this.props.foreign.current.length
+      && this.props.smallCap.current.length
   }
 
   suggestTransfers = () => {
-    const sum = Object.keys(this.state.current).reduce((sum, key) => sum + parseInt(this.state.current[key] || 0), 0);
-    const riskConfig = data.find(row => row.Risk === this.props.selectedRisk);
+    const sum = parseInt(this.props.bonds.current) 
+      + parseInt(this.props.largeCap.current)
+      + parseInt(this.props.midCap.current)
+      + parseInt(this.props.foreign.current)
+      + parseInt(this.props.smallCap.current);
 
-    this.setState(prevState => ({
-      difference: {
-        ...prevState.difference,
-        bonds: (sum * riskConfig.Bonds / 100) - this.state.current.bonds,
-        largeCap: (sum * riskConfig.LargeCap / 100) - this.state.current.largeCap,
-        midCap: (sum * riskConfig.MidCap / 100) - this.state.current.midCap,
-        foreign: (sum * riskConfig.Foreign / 100) - this.state.current.foreign,
-        smallCap: (sum * riskConfig.SmallCap / 100) - this.state.current.smallCap
-      }
-    }))
+    const bondsDifference = (sum * this.props.idealConfig.Bonds / 100) - this.props.bonds.current;
+    const largeCapDifference = (sum * this.props.idealConfig.LargeCap / 100) - this.props.largeCap.current;
+    const midCapDifference = (sum * this.props.idealConfig.MidCap / 100) - this.props.midCap.current;
+    const foreignDifference = (sum * this.props.idealConfig.Foreign / 100) - this.props.foreign.current ;
+    const smallCapDifference = (sum * this.props.idealConfig.SmallCap / 100) - this.props.smallCap.current;
+
+    const Bonds = {
+      difference: bondsDifference,
+      newAmount: parseInt(this.props.bonds.current) + bondsDifference
+    };
+
+    const LargeCap = {
+      difference: largeCapDifference,
+      newAmount: parseInt(this.props.largeCap.current) + largeCapDifference
+    }
+
+    const MidCap = {
+      difference: midCapDifference,
+      newAmount: parseInt(this.props.midCap.current) + midCapDifference
+    }
+
+    const Foreign = {
+      difference: foreignDifference,
+      newAmount: parseInt(this.props.foreign.current) + foreignDifference
+    }
+
+    const SmallCap = {
+      difference: smallCapDifference,
+      newAmount: parseInt(this.props.smallCap.current) + smallCapDifference
+    }
+
+    const { updateValues } = this.props;
+
+    updateValues({
+      Bonds,
+      LargeCap,
+      MidCap,
+      Foreign,
+      SmallCap
+    });
   }
-
-  fillDiferences = () => [
-    
-  ]
 
   render () {
     return (
@@ -124,8 +134,8 @@ class RebalanceInvestmentsPage extends React.Component {
           <div className='rebalance-section'>
             <h5>Please Enter your current Portfolio</h5>
             <Button 
-              color={Colors.WARNING} 
-              disabled={!this.areFieldsFilled()}
+              color={Colors.WARNING}
+              disabled={!this.areCurrentFieldsFilled()}
               onClick={this.suggestTransfers}
             >
               Rebalance
@@ -143,21 +153,11 @@ class RebalanceInvestmentsPage extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {
-                Object.entries(
-                  data
-                    .find(row => row.Risk === this.props.selectedRisk)
-                ).filter(entry => entry[0] !== 'Risk')
-                .map((o, idx) => (
-                  <tr key={o[0]}>
-                    <td>{o[0]} $:</td>
-                    <td><input data-field={o[0]} type='text' onBlur={this.handleBlur} required /></td>
-                    <td><input data-field={o[0]} type='text' disabled /></td>
-                    <td><input data-field={o[0]} type='text' disabled /></td>
-                    {idx === 0 ? (<td rowSpan="5"><input className='movements' type='textarea' disabled/></td>) : null}
-                  </tr>
-                ))
-              }
+              <BalanceValues name='Bonds $:' value={this.props.bonds} handleBlur={this.handleBondsBlur} renderRowspan />
+              <BalanceValues name='Large Cap $:' value={this.props.largeCap} handleBlur={this.handleLargeCapBlur}  />
+              <BalanceValues name='Mid Cap $:' value={this.props.midCap} handleBlur={this.handleMidCapBlur}  />
+              <BalanceValues name='Foreign $:' value={this.props.foreign} handleBlur={this.handleForeignBlur}  />
+              <BalanceValues name='Small Cap $:' value={this.props.smallCap} handleBlur={this.handleSmallCapBlur}  />
             </tbody>
           </table>
         </div>
@@ -166,11 +166,23 @@ class RebalanceInvestmentsPage extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setIdealConfig: config => dispatch(setIdealConfig(config))
+  setIdealConfig: config => dispatch(setIdealConfig(config)),
+  setCurrentBonds: bonds => dispatch(setCurrentBonds(bonds)),
+  setCurrentLargeCap: largeCap => dispatch(setCurrentLargeCap(largeCap)),
+  setCurrentMidCap: midCap => dispatch(setCurrentMidCap(midCap)),
+  setCurrentForeign: foreign => dispatch(setCurrentForeign(foreign)),
+  setCurrentSmallCap: smallCap => dispatch(setCurrentSmallCap(smallCap)),
+  updateValues: obj => dispatch(updateValues(obj)),
 })
 
 const mapStateToProps = state => ({
-  selectedRisk: state.risk.selectedRisk
+  selectedRisk: state.risk.selectedRisk,
+  idealConfig: state.rebalance.idealConfig,
+  bonds: state.rebalance.Bonds,
+  largeCap: state.rebalance.LargeCap,
+  midCap: state.rebalance.MidCap,
+  foreign: state.rebalance.Foreign,
+  smallCap: state.rebalance.SmallCap
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RebalanceInvestmentsPage);
