@@ -5,7 +5,6 @@ const INITIAL_STATE = {
 }
 
 const riskReducer = (state = INITIAL_STATE, action) => {
-  console.log('risk reducer');
   switch(action.type) {
     case 'SET_RISK_SELECTION':
       return {

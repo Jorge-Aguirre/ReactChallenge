@@ -1,9 +1,33 @@
 const INITIAL_STATE = {
-  idealConfig: null
+  idealConfig: null,
+  Bonds: {
+    current: null,
+    difference: null,
+    newAmount: null,
+  },
+  LargeCap: {
+    current: null,
+    difference: null,
+    newAmount: null,
+  },
+  MidCap: {
+    current: null,
+    difference: null,
+    newAmount: null,
+  },
+  Foreign: {
+    current: null,
+    difference: null,
+    newAmount: null,
+  },
+  SmallCap: {
+    current: null,
+    difference: null,
+    newAmount: null,
+  },
 }
 
 const rebalanceReducer = (state = INITIAL_STATE, action) => {
-  console.log('rebalance reducer');
   switch(action.type) {
     case 'SET_IDEAL_CONFIG':
       return {
