@@ -1,4 +1,6 @@
-.to-donut-button {
+.action-button {
+  padding: 5px;
+  margin: 5px;
   width: 150px;
-  margin: auto;
+  height: 35px;
 }

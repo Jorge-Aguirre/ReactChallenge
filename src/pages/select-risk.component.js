@@ -6,12 +6,12 @@ import { Button, Colors } from 'react-foundation';
 import './select-risk.styles.css';
 import { DonutChartPortfolio } from '../components/donut-chart/donut-chart.component';
 
-export const SelectRiskPage = ({ riskValues, selectedRisk, isDonutChartViewSelected, handleClick, swithToDonutChart }) => (
+export const SelectRiskPage = ({ riskValues, selectedRisk, isDonutChartViewSelected, selectRisk, swithToDonutChart, goToRebalancePage }) => (
   <div className='content'>
     <RiskSelector
       riskValues={riskValues}
       selectedRisk={selectedRisk}
-      onClick={(i) => handleClick(i+1)}
+      onClick={(i) => selectRisk(i+1)}
     />
     {
       isDonutChartViewSelected ? 
@@ -19,14 +19,23 @@ export const SelectRiskPage = ({ riskValues, selectedRisk, isDonutChartViewSelec
         <RecomendedPortfolio selectedRisk={selectedRisk} />
     }
     {
-      selectedRisk ? 
-        <Button 
-          className='to-donut-button' 
-          color={Colors.WARNING}
-          onClick={swithToDonutChart}
-        >
-          See Donut Chart
-        </Button> : ''
+      selectedRisk ?
+        <div>
+          <Button 
+            className='action-button' 
+            color={Colors.WARNING}
+            onClick={swithToDonutChart}
+          >
+            See {isDonutChartViewSelected ? 'Table' : 'Donut'} Chart
+          </Button>
+          <Button
+            className='action-button'
+            color={Colors.SECONDARY}
+            onClick={goToRebalancePage}
+          >
+            Rebalance
+          </Button>
+        </div> : ''
     }
   </div>
 );

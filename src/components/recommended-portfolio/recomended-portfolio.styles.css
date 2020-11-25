@@ -1,3 +1,7 @@
 .selected {
   background-color: #ffae00 !important;
 }
+
+th {
+  text-align: center !important;
+}

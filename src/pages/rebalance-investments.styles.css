@@ -1,0 +1,17 @@
+.movements {
+  height: 340px;
+}
+
+input {
+  text-align: right;
+}
+
+.rebalance-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.rebalance-section button {
+  justify-content: flex-end;
+}

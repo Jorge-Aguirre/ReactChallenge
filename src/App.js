@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { SelectRiskPage } from './pages/select-risk.component';
-import { RebalanceInvestmentsPage } from './pages/rebalance-investments.component';
+import RebalanceInvestmentsPage from './pages/rebalance-investments.component';
 
 class App extends React.Component {
   constructor(props) {
@@ -27,6 +27,10 @@ class App extends React.Component {
     })
   }
 
+  goToRebalancePage = () => {
+    this.props.history.push('/rebalance')
+  }
+
   render() {
     return (
       <div className="App">
@@ -44,10 +48,23 @@ class App extends React.Component {
                 riskValues={this.state.riskValues} 
                 selectedRisk={this.state.selectedRisk}
                 isDonutChartViewSelected={this.state.isDonutChartViewSelected}
-                handleClick={this.selectRisk}
+                selectRisk={this.selectRisk}
+                goToRebalancePage={this.goToRebalancePage}
                 swithToDonutChart={this.swithToDonutChart}
-              />} />
-          <Route exact path='/rebalance' component={RebalanceInvestmentsPage} />
+              />
+            } 
+          />
+          <Route 
+            exact path='/rebalance' 
+            render={props =>
+              this.state.selectedRisk ? 
+                <RebalanceInvestmentsPage
+                  {...props}
+                  selectedRisk={this.state.selectedRisk}
+                />
+              : (<Redirect to='/' />)
+            }
+          />
         </Switch>
 
 
@@ -56,4 +73,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);
