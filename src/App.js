@@ -1,34 +1,22 @@
 import React from 'react';
 import './App.css';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import { SelectRiskPage } from './pages/select-risk.component';
+import { Switch, Route } from 'react-router-dom';
+import SelectRiskPage from './pages/select-risk.component';
 import RebalanceInvestmentsPage from './pages/rebalance-investments.component';
+import { connect } from 'react-redux';
+import { setRiskSelection, switchView } from './redux/risk/risk.actions';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      riskValues: [...Array(10).keys()],
-      selectedRisk: null,
-      isDonutChartViewSelected: false
-    }
-  }
-
   selectRisk = risk => {
-    this.setState({
-      selectedRisk: risk
-    });
+    const { setRiskSelection } = this.props;
+
+    setRiskSelection(risk);
   }
 
   swithToDonutChart = () => {
-    this.setState({
-      isDonutChartViewSelected: !this.state.isDonutChartViewSelected
-    })
-  }
+    const { switchView } = this.props;
 
-  goToRebalancePage = () => {
-    this.props.history.push('/rebalance')
+    switchView(!this.props.isDonutChartViewSelected);
   }
 
   render() {
@@ -45,26 +33,15 @@ class App extends React.Component {
             render={props => 
               <SelectRiskPage 
                 {...props} 
-                riskValues={this.state.riskValues} 
-                selectedRisk={this.state.selectedRisk}
-                isDonutChartViewSelected={this.state.isDonutChartViewSelected}
+                riskValues={this.props.riskValues} 
+                selectedRisk={this.props.selectedRisk}
+                isDonutChartViewSelected={this.props.isDonutChartViewSelected}
                 selectRisk={this.selectRisk}
-                goToRebalancePage={this.goToRebalancePage}
                 swithToDonutChart={this.swithToDonutChart}
               />
             } 
           />
-          <Route 
-            exact path='/rebalance' 
-            render={props =>
-              this.state.selectedRisk ? 
-                <RebalanceInvestmentsPage
-                  {...props}
-                  selectedRisk={this.state.selectedRisk}
-                />
-              : (<Redirect to='/' />)
-            }
-          />
+          <Route path='/rebalance' component={RebalanceInvestmentsPage} />
         </Switch>
 
 
@@ -73,4 +50,15 @@ class App extends React.Component {
   }
 }
 
-export default withRouter(App);
+
+const mapDispatchToProps = dispatch => ({
+  setRiskSelection: risk => dispatch(setRiskSelection(risk)),
+  switchView: value => dispatch(switchView(value)),
+})
+
+const mapStateToProps = state => ({
+  riskValues: state.risk.riskValues,
+  isDonutChartViewSelected: state.risk.isDonutChartViewSelected
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

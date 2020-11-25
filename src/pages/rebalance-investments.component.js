@@ -1,36 +1,18 @@
 import React from 'react';
 import { Button, Colors } from 'react-foundation';
 import data from '../data/ideal-risk-balance';
+import { connect } from 'react-redux';
+import { setIdealConfig } from '../redux/rebalance/rebalance.actions';
 
 import './rebalance-investments.styles.css';
 
 class RebalanceInvestmentsPage extends React.Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    const { setIdealConfig } = this.props;
 
-    this.state = {
-      current: {
-        bonds: '',
-        largeCap: '',
-        midCap: '',
-        foreign: '',
-        smallCap: ''
-      },
-      difference: {
-        bonds: '',
-        largeCap: '',
-        midCap: '',
-        foreign: '',
-        smallCap: ''
-      },
-      newAmount: {
-        bonds: '',
-        largeCap: '',
-        midCap: '',
-        foreign: '',
-        smallCap: ''
-      }
-    }
+    const filteredData = data.find(row => row.Risk === this.props.selectedRisk);
+    
+    setIdealConfig(filteredData);
   }
 
   handleBlur = event => {
@@ -80,11 +62,13 @@ class RebalanceInvestmentsPage extends React.Component {
   }
 
   areFieldsFilled = () => {
+    /*
     return this.state.current.bonds.length 
       && this.state.current.largeCap.length
       && this.state.current.midCap.length
       && this.state.current.foreign.length
       && this.state.current.smallCap.length 
+      */
   }
 
   suggestTransfers = () => {
@@ -181,4 +165,12 @@ class RebalanceInvestmentsPage extends React.Component {
   }
 }
 
-export default RebalanceInvestmentsPage;
+const mapDispatchToProps = dispatch => ({
+  setIdealConfig: config => dispatch(setIdealConfig(config))
+})
+
+const mapStateToProps = state => ({
+  selectedRisk: state.risk.selectedRisk
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RebalanceInvestmentsPage);

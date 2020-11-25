@@ -1,7 +1,7 @@
 import { Badge, Colors } from 'react-foundation';
 import './risk-selector.styles.css';
 
-export const RiskSelector = (props) => (
+const RiskSelector = (props) => (
   <div className="risk-selector">
     Please select a Risk Level for your Investment Portfolio
     <h5>Risk Level Selected: {props.selectedRisk}</h5>
@@ -21,3 +21,5 @@ export const RiskSelector = (props) => (
     </ul>
   </div>
 );
+
+export default RiskSelector;

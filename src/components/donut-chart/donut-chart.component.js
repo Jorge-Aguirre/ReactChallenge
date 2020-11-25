@@ -1,11 +1,11 @@
 import { React } from "react";
 import DonutChart from 'react-donut-chart';
 import data from '../../data/ideal-risk-balance';
+import { connect } from 'react-redux';
 
 import './donut-chart.styles.css';
 
-export const DonutChartPortfolio = (props) => (
-  //console.log(Object.entries(data.find(entry => entry.Risk === props.selectedRisk))),
+const DonutChartPortfolio = (props) => (
   <div className='wrap-donut-chart'>
     <DonutChart
       data={
@@ -24,4 +24,10 @@ export const DonutChartPortfolio = (props) => (
       height={450}
     />
   </div>
-)
+);
+
+const mapStateToProps = state => ({
+  selectedRisk: state.risk.selectedRisk
+});
+
+export default connect(mapStateToProps)(DonutChartPortfolio);
