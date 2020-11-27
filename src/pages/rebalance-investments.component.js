@@ -19,7 +19,8 @@ class RebalanceInvestmentsPage extends React.Component {
   }
 
   handleBondsBlur = event => {
-    if (event.target.validity.valid) {
+    let reg = /^\d+$/;
+    if (event.target.value.match(reg)) {
       const { setCurrentBonds } = this.props;
 
       setCurrentBonds(event.target.value);
@@ -30,7 +31,8 @@ class RebalanceInvestmentsPage extends React.Component {
 
   }
   handleLargeCapBlur = event => {
-    if (event.target.validity.valid) {
+    let reg = /^\d+$/;
+    if (event.target.value.match(reg)) {
       const { setCurrentLargeCap } = this.props;
 
       setCurrentLargeCap(event.target.value);
@@ -40,7 +42,8 @@ class RebalanceInvestmentsPage extends React.Component {
     }
   }
   handleMidCapBlur = event => {
-    if (event.target.validity.valid) {
+    let reg = /^\d+$/;
+    if (event.target.value.match(reg)) {
       const { setCurrentMidCap } = this.props;
 
       setCurrentMidCap(event.target.value);
@@ -50,7 +53,8 @@ class RebalanceInvestmentsPage extends React.Component {
     }
   }
   handleForeignBlur = event => {
-    if (event.target.validity.valid) {
+    let reg = /^\d+$/;
+    if (event.target.value.match(reg)) {
       const { setCurrentForeign } = this.props;
 
       setCurrentForeign(event.target.value);
@@ -60,7 +64,8 @@ class RebalanceInvestmentsPage extends React.Component {
     }
   }
   handleSmallCapBlur = event => {
-    if (event.target.validity.valid) {
+    let reg = /^\d+$/;
+    if (event.target.value.match(reg)) {
       const { setCurrentSmallCap } = this.props;
 
       setCurrentSmallCap(event.target.value);

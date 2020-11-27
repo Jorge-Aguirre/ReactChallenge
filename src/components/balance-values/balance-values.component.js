@@ -9,7 +9,6 @@ const BalanceValues = ({ name, value, handleBlur, renderRowspan }) => (
     <td>
       <input 
         type='text'
-        pattern="[0-9]"
         onBlur={handleBlur} 
       />
     </td>
