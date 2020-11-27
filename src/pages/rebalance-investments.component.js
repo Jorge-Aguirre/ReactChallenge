@@ -19,29 +19,55 @@ class RebalanceInvestmentsPage extends React.Component {
   }
 
   handleBondsBlur = event => {
-    const { setCurrentBonds } = this.props;
+    if (event.target.validity.valid) {
+      const { setCurrentBonds } = this.props;
 
-    setCurrentBonds(event.target.value);
+      setCurrentBonds(event.target.value);
+    } else {
+      event.target.value = '';
+      alert('Please input onlye numerica values');
+    }
+
   }
   handleLargeCapBlur = event => {
-    const { setCurrentLargeCap } = this.props;
+    if (event.target.validity.valid) {
+      const { setCurrentLargeCap } = this.props;
 
-    setCurrentLargeCap(event.target.value);
+      setCurrentLargeCap(event.target.value);
+    } else {
+      event.target.value = '';
+      alert('Please input onlye numerica values');
+    }
   }
   handleMidCapBlur = event => {
-    const { setCurrentMidCap } = this.props;
+    if (event.target.validity.valid) {
+      const { setCurrentMidCap } = this.props;
 
-    setCurrentMidCap(event.target.value);
+      setCurrentMidCap(event.target.value);
+    } else {
+      event.target.value = '';
+      alert('Please input onlye numerica values');
+    }
   }
   handleForeignBlur = event => {
-    const { setCurrentForeign } = this.props;
+    if (event.target.validity.valid) {
+      const { setCurrentForeign } = this.props;
 
-    setCurrentForeign(event.target.value);
+      setCurrentForeign(event.target.value);
+    } else {
+      event.target.value = '';
+      alert('Please input onlye numerica values');
+    }
   }
   handleSmallCapBlur = event => {
-    const { setCurrentSmallCap } = this.props;
+    if (event.target.validity.valid) {
+      const { setCurrentSmallCap } = this.props;
 
-    setCurrentSmallCap(event.target.value);
+      setCurrentSmallCap(event.target.value);
+    } else {
+      event.target.value = '';
+      alert('Please input onlye numerica values');
+    }
   }
 
   areCurrentFieldsFilled = () => {

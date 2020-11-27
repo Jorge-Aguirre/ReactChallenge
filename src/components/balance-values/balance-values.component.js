@@ -1,4 +1,5 @@
 import React from 'react';
+import SuggestedTransfer from '../suggested-transfers/suggested-transfers.component';
 
 import './balance-values.styles.css';
 
@@ -8,6 +9,7 @@ const BalanceValues = ({ name, value, handleBlur, renderRowspan }) => (
     <td>
       <input 
         type='text'
+        pattern="[0-9]"
         onBlur={handleBlur} 
       />
     </td>
@@ -28,7 +30,7 @@ const BalanceValues = ({ name, value, handleBlur, renderRowspan }) => (
         disabled
       />
     </td>
-    {renderRowspan ? (<td rowSpan="5"><input className='movements' type='textarea' disabled/></td>) : null}
+    {renderRowspan ? (<SuggestedTransfer />) : null}
   </tr>
 );
 
