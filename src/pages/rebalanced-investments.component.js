@@ -26,7 +26,7 @@ class RebalancedInvestmentsPage extends React.Component {
       setCurrentBonds(event.target.value);
     } else {
       event.target.value = '';
-      alert('Please input only numeric values');
+      alert('Please input only positive numeric values');
     }
 
   }
@@ -38,7 +38,7 @@ class RebalancedInvestmentsPage extends React.Component {
       setCurrentLargeCap(event.target.value);
     } else {
       event.target.value = '';
-      alert('Please input only numeric values');
+      alert('Please input only positive numeric values');
     }
   }
   handleMidCapBlur = event => {
@@ -49,7 +49,7 @@ class RebalancedInvestmentsPage extends React.Component {
       setCurrentMidCap(event.target.value);
     } else {
       event.target.value = '';
-      alert('Please input only numeric values');
+      alert('Please input only positive numeric values');
     }
   }
   handleForeignBlur = event => {
@@ -60,7 +60,7 @@ class RebalancedInvestmentsPage extends React.Component {
       setCurrentForeign(event.target.value);
     } else {
       event.target.value = '';
-      alert('Please input only numeric values');
+      alert('Please input only positive numeric values');
     }
   }
   handleSmallCapBlur = event => {
@@ -71,7 +71,7 @@ class RebalancedInvestmentsPage extends React.Component {
       setCurrentSmallCap(event.target.value);
     } else {
       event.target.value = '';
-      alert('Please input only numeric values');
+      alert('Please input only positive numeric values');
     }
   }
 
@@ -97,27 +97,27 @@ class RebalancedInvestmentsPage extends React.Component {
     const smallCapDifference = (sum * this.props.idealConfig.SmallCap / 100) - this.props.smallCap.current;
 
     const Bonds = {
-      difference: bondsDifference,
+      difference: Math.round(bondsDifference * 100) / 100,
       newAmount: parseInt(this.props.bonds.current) + bondsDifference
     };
 
     const LargeCap = {
-      difference: largeCapDifference,
+      difference: Math.round(largeCapDifference * 100) / 100,
       newAmount: parseInt(this.props.largeCap.current) + largeCapDifference
     }
 
     const MidCap = {
-      difference: midCapDifference,
+      difference: Math.round(midCapDifference * 100) / 100,
       newAmount: parseInt(this.props.midCap.current) + midCapDifference
     }
 
     const Foreign = {
-      difference: foreignDifference,
+      difference: Math.round(foreignDifference * 100) / 100,
       newAmount: parseInt(this.props.foreign.current) + foreignDifference
     }
 
     const SmallCap = {
-      difference: smallCapDifference,
+      difference: Math.round(smallCapDifference * 100) / 100,
       newAmount: parseInt(this.props.smallCap.current) + smallCapDifference
     }
 

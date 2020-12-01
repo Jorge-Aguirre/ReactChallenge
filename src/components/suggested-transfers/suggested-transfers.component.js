@@ -7,7 +7,7 @@ const SuggestedTransfer = ({bonds, largeCap, midCap, foreign, smallCap}) => {
   const buildTransfer = () => {
     let transfers = [];
 
-    if (bonds && largeCap, midCap, foreign, smallCap) {
+    if (bonds && largeCap && midCap && foreign && smallCap) {
       let sorted = [ 
         { key: 'Bonds', value: bonds }, 
         { key: 'Large Cap', value: largeCap }, 
@@ -25,13 +25,13 @@ const SuggestedTransfer = ({bonds, largeCap, midCap, foreign, smallCap}) => {
 
         if (minValue >= maxValue) {
           transferAmount = sorted[sorted.length - 1].value;
-          sorted[0].value = (minValue - maxValue) * -1;
+          sorted[0].value = Math.round(((minValue - maxValue) * -1) * 100) / 100;
           sorted[sorted.length - 1].value = 0;
           sorted.splice(sorted.length - 1, 1);
         } else {
           transferAmount = (sorted[0].value * -1);
           sorted[0].value = 0;
-          sorted[sorted.length - 1].value = maxValue - minValue;
+          sorted[sorted.length - 1].value = Math.round((maxValue - minValue) * 100) / 100;
           sorted.splice(0, 1)
         }
 
