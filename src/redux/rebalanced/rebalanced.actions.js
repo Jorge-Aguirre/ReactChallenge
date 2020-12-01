@@ -7,11 +7,11 @@ export const setCurrentBonds = bonds => ({
   payload: bonds
 });
 export const setCurrentLargeCap = largeCap => ({
-  type: 'SET_CURRENT_LARGECAP',
+  type: 'SET_CURRENT_LARGE_CAP',
   payload: largeCap
 });
 export const setCurrentMidCap = midCap => ({
-  type: 'SET_CURRENT_MIDCAP',
+  type: 'SET_CURRENT_MID_CAP',
   payload: midCap
 });
 export const setCurrentForeign = foreign => ({
@@ -19,7 +19,7 @@ export const setCurrentForeign = foreign => ({
   payload: foreign
 });
 export const setCurrentSmallCap = smallCap => ({
-  type: 'SET_CURRENT_SMALLCAP',
+  type: 'SET_CURRENT_SMALL_CAP',
   payload: smallCap
 });
 export const updateValues = values => ({

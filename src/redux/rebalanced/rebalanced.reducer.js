@@ -27,7 +27,7 @@ const INITIAL_STATE = {
   },
 }
 
-const rebalanceReducer = (state = INITIAL_STATE, action) => {
+const rebalancedReducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case 'SET_IDEAL_CONFIG':
       return {
@@ -42,7 +42,7 @@ const rebalanceReducer = (state = INITIAL_STATE, action) => {
           current: action.payload
         }
       }
-    case 'SET_CURRENT_LARGECAP':
+    case 'SET_CURRENT_LARGE_CAP':
       return {
         ...state,
         LargeCap:{
@@ -50,7 +50,7 @@ const rebalanceReducer = (state = INITIAL_STATE, action) => {
           current: action.payload
         }
       }
-    case 'SET_CURRENT_MIDCAP':
+    case 'SET_CURRENT_MID_CAP':
       return {
         ...state,
         MidCap:{
@@ -66,7 +66,7 @@ const rebalanceReducer = (state = INITIAL_STATE, action) => {
           current: action.payload
         }
       }
-    case 'SET_CURRENT_SMALLCAP':
+    case 'SET_CURRENT_SMALL_CAP':
       return {
         ...state,
         SmallCap:{
@@ -108,4 +108,4 @@ const rebalanceReducer = (state = INITIAL_STATE, action) => {
   }
 }
 
-export default rebalanceReducer;
+export default rebalancedReducer;

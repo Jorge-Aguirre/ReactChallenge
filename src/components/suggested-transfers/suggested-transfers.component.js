@@ -55,11 +55,11 @@ const SuggestedTransfer = ({bonds, largeCap, midCap, foreign, smallCap}) => {
 }
 
 const mapStateToProps = state => ({
-    bonds: state.rebalance.Bonds.difference,
-    largeCap: state.rebalance.LargeCap.difference,
-    midCap: state.rebalance.MidCap.difference,
-    foreign: state.rebalance.Foreign.difference,
-    smallCap: state.rebalance.SmallCap.difference
+    bonds: state.rebalanced.Bonds.difference,
+    largeCap: state.rebalanced.LargeCap.difference,
+    midCap: state.rebalanced.MidCap.difference,
+    foreign: state.rebalanced.Foreign.difference,
+    smallCap: state.rebalanced.SmallCap.difference
 });
 
 export default connect(mapStateToProps)(SuggestedTransfer);

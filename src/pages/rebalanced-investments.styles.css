@@ -2,12 +2,12 @@ input {
   text-align: right;
 }
 
-.rebalance-section {
+.rebalanced-section {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.rebalance-section button {
+.rebalanced-section button {
   justify-content: flex-end;
 }

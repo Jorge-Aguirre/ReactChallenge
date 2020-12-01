@@ -1,6 +1,6 @@
 import React from 'react';
 import RiskSelector from '../components/risk-selector/risk-selector.component';
-import RecomendedPortfolio from '../components/recommended-portfolio/recomended-portfolio.component';
+import RecommendedPortfolio from '../components/recommended-portfolio/recommended-portfolio.component';
 import DonutChartPortfolio  from '../components/donut-chart/donut-chart.component';
 import { Button, Colors } from 'react-foundation';
 import { connect } from 'react-redux';
@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 
 import './select-risk.styles.css';
 
-const SelectRiskPage = ({ riskValues, selectedRisk, isDonutChartViewSelected, selectRisk, swithToDonutChart, goToRebalancePage }) => {
+const SelectRiskPage = ({ riskValues, selectedRisk, isDonutChartViewSelected, selectRisk, switchToDonutChart }) => {
   const history = useHistory();
 
   return (
@@ -21,7 +21,7 @@ const SelectRiskPage = ({ riskValues, selectedRisk, isDonutChartViewSelected, se
       {
         isDonutChartViewSelected ? 
           <DonutChartPortfolio /> :
-          <RecomendedPortfolio />
+          <RecommendedPortfolio />
       }
       {
         selectedRisk ?
@@ -29,16 +29,16 @@ const SelectRiskPage = ({ riskValues, selectedRisk, isDonutChartViewSelected, se
             <Button 
               className='action-button' 
               color={Colors.WARNING}
-              onClick={swithToDonutChart}
+              onClick={switchToDonutChart}
             >
               See {isDonutChartViewSelected ? 'Table' : 'Donut'} Chart
             </Button>
             <Button
               className='action-button'
               color={Colors.SECONDARY}
-              onClick={() => history.push('/rebalance')}
+              onClick={() => history.push('/rebalanced')}
             >
-              Rebalance
+              Rebalanced
             </Button>
           </div> : ''
       }

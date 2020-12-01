@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import data from '../../data/ideal-risk-balance';
 
-import './recomended-portfolio.styles.css';
+import './recommended-portfolio.styles.css';
 
-const RecomendedPortfolio = (props) => (
+const RecommendedPortfolio = (props) => (
   <table>
     <thead>
       <tr>
@@ -35,4 +35,4 @@ const mapStateToProps = state => ({
   selectedRisk: state.risk.selectedRisk
 })
 
-export default connect(mapStateToProps)(RecomendedPortfolio);
+export default connect(mapStateToProps)(RecommendedPortfolio);

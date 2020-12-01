@@ -4,12 +4,12 @@ import data from '../data/ideal-risk-balance';
 import { connect } from 'react-redux';
 import { setIdealConfig, setCurrentBonds, setCurrentLargeCap,
          setCurrentMidCap, setCurrentForeign, setCurrentSmallCap,
-         updateValues } from '../redux/rebalance/rebalance.actions';
+         updateValues } from '../redux/rebalanced/rebalanced.actions';
 import BalanceValues from '../components/balance-values/balance-values.component';
 
-import './rebalance-investments.styles.css';
+import './rebalanced-investments.styles.css';
 
-class RebalanceInvestmentsPage extends React.Component {
+class RebalancedInvestmentsPage extends React.Component {
   componentDidMount() {
     const { setIdealConfig } = this.props;
 
@@ -26,7 +26,7 @@ class RebalanceInvestmentsPage extends React.Component {
       setCurrentBonds(event.target.value);
     } else {
       event.target.value = '';
-      alert('Please input onlye numerica values');
+      alert('Please input only numeric values');
     }
 
   }
@@ -38,7 +38,7 @@ class RebalanceInvestmentsPage extends React.Component {
       setCurrentLargeCap(event.target.value);
     } else {
       event.target.value = '';
-      alert('Please input onlye numerica values');
+      alert('Please input only numeric values');
     }
   }
   handleMidCapBlur = event => {
@@ -49,7 +49,7 @@ class RebalanceInvestmentsPage extends React.Component {
       setCurrentMidCap(event.target.value);
     } else {
       event.target.value = '';
-      alert('Please input onlye numerica values');
+      alert('Please input only numeric values');
     }
   }
   handleForeignBlur = event => {
@@ -60,7 +60,7 @@ class RebalanceInvestmentsPage extends React.Component {
       setCurrentForeign(event.target.value);
     } else {
       event.target.value = '';
-      alert('Please input onlye numerica values');
+      alert('Please input only numeric values');
     }
   }
   handleSmallCapBlur = event => {
@@ -71,7 +71,7 @@ class RebalanceInvestmentsPage extends React.Component {
       setCurrentSmallCap(event.target.value);
     } else {
       event.target.value = '';
-      alert('Please input onlye numerica values');
+      alert('Please input only numeric values');
     }
   }
 
@@ -93,7 +93,7 @@ class RebalanceInvestmentsPage extends React.Component {
     const bondsDifference = (sum * this.props.idealConfig.Bonds / 100) - this.props.bonds.current;
     const largeCapDifference = (sum * this.props.idealConfig.LargeCap / 100) - this.props.largeCap.current;
     const midCapDifference = (sum * this.props.idealConfig.MidCap / 100) - this.props.midCap.current;
-    const foreignDifference = (sum * this.props.idealConfig.Foreign / 100) - this.props.foreign.current ;
+    const foreignDifference = (sum * this.props.idealConfig.Foreign / 100) - this.props.foreign.current;
     const smallCapDifference = (sum * this.props.idealConfig.SmallCap / 100) - this.props.smallCap.current;
 
     const Bonds = {
@@ -162,14 +162,14 @@ class RebalanceInvestmentsPage extends React.Component {
               </tr>
             </tbody>
           </table>
-          <div className='rebalance-section'>
+          <div className='rebalanced-section'>
             <h5>Please Enter your current Portfolio</h5>
             <Button 
               color={Colors.WARNING}
               disabled={!this.areCurrentFieldsFilled()}
               onClick={this.suggestTransfers}
             >
-              Rebalance
+              Rebalanced
             </Button>
           </div>
 
@@ -180,11 +180,11 @@ class RebalanceInvestmentsPage extends React.Component {
                 <th>Current Amount</th>
                 <th>Difference</th>
                 <th>New Amount</th>
-                <th>Recomended Transfers</th>
+                <th>Recommended Transfers</th>
               </tr>
             </thead>
             <tbody>
-              <BalanceValues name='Bonds $:' value={this.props.bonds} handleBlur={this.handleBondsBlur} renderRowspan />
+              <BalanceValues name='Bonds $:' value={this.props.bonds} handleBlur={this.handleBondsBlur} renderRowSpan />
               <BalanceValues name='Large Cap $:' value={this.props.largeCap} handleBlur={this.handleLargeCapBlur}  />
               <BalanceValues name='Mid Cap $:' value={this.props.midCap} handleBlur={this.handleMidCapBlur}  />
               <BalanceValues name='Foreign $:' value={this.props.foreign} handleBlur={this.handleForeignBlur}  />
@@ -208,12 +208,12 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   selectedRisk: state.risk.selectedRisk,
-  idealConfig: state.rebalance.idealConfig,
-  bonds: state.rebalance.Bonds,
-  largeCap: state.rebalance.LargeCap,
-  midCap: state.rebalance.MidCap,
-  foreign: state.rebalance.Foreign,
-  smallCap: state.rebalance.SmallCap
+  idealConfig: state.rebalanced.idealConfig,
+  bonds: state.rebalanced.Bonds,
+  largeCap: state.rebalanced.LargeCap,
+  midCap: state.rebalanced.MidCap,
+  foreign: state.rebalanced.Foreign,
+  smallCap: state.rebalanced.SmallCap
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RebalanceInvestmentsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RebalancedInvestmentsPage);

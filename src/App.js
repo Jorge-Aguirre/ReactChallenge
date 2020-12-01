@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import SelectRiskPage from './pages/select-risk.component';
-import RebalanceInvestmentsPage from './pages/rebalance-investments.component';
+import RebalancedInvestmentsPage from './pages/rebalanced-investments.component';
 import { connect } from 'react-redux';
 import { setRiskSelection, switchView } from './redux/risk/risk.actions';
 
@@ -13,7 +13,7 @@ class App extends React.Component {
     setRiskSelection(risk);
   }
 
-  swithToDonutChart = () => {
+  switchToDonutChart = () => {
     const { switchView } = this.props;
 
     switchView(!this.props.isDonutChartViewSelected);
@@ -37,11 +37,11 @@ class App extends React.Component {
                 selectedRisk={this.props.selectedRisk}
                 isDonutChartViewSelected={this.props.isDonutChartViewSelected}
                 selectRisk={this.selectRisk}
-                swithToDonutChart={this.swithToDonutChart}
+                switchToDonutChart={this.switchToDonutChart}
               />
             } 
           />
-          <Route path='/rebalance' component={RebalanceInvestmentsPage} />
+          <Route path='/rebalanced' component={RebalancedInvestmentsPage} />
         </Switch>
 
 

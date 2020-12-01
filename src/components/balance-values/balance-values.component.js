@@ -3,7 +3,7 @@ import SuggestedTransfer from '../suggested-transfers/suggested-transfers.compon
 
 import './balance-values.styles.css';
 
-const BalanceValues = ({ name, value, handleBlur, renderRowspan }) => (
+const BalanceValues = ({ name, value, handleBlur, renderRowSpan }) => (
   <tr>
     <td>{name}</td>
     <td>
@@ -29,7 +29,7 @@ const BalanceValues = ({ name, value, handleBlur, renderRowspan }) => (
         disabled
       />
     </td>
-    {renderRowspan ? (<SuggestedTransfer />) : null}
+    {renderRowSpan ? (<SuggestedTransfer />) : null}
   </tr>
 );
 
