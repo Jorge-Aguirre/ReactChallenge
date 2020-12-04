@@ -11,3 +11,80 @@ input {
 .rebalanced-section button {
   justify-content: flex-end;
 }
+
+.rebalanced-content {
+  width: 70%;
+  margin: auto;
+}
+
+.mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .mobile {
+    display: table;
+    border: 1px solid black;
+    min-height: auto;
+  }
+
+  .rebalanced-content {
+    width: 100%;
+    margin: 0;
+  }
+
+  .current-risk {
+    font-size: 12px;
+  }
+
+  .rebalanced-table {
+    height: 65vh;
+    overflow: auto;
+    font-size: 12px;
+  }
+
+  .rebalanced-table, .rebalanced-table-head, .rebalanced-table-body, .rebalanced-table-th, .rebalanced-table-td, .rebalanced-table-tr {
+    display: block;
+    padding: 0px !important;
+  }
+
+  .rebalanced-table-head .rebalanced-table-tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .rebalanced-table-tr {
+    border: 1px solid #ccc
+  }
+
+  .rebalanced-table-td {
+    border: none;
+    position: relative;
+    padding-left: 70% !important;
+  }
+
+  .rebalanced-table-td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45px;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+
+  .rebalanced-table-td:nth-of-type(2):before { content: "Current Amount:" }
+  .rebalanced-table-td:nth-of-type(3):before { content: "Difference:" }
+  .rebalanced-table-td:nth-of-type(4):before { content: "New Amount:" }
+
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rebalanced-section {
+    order: 2;
+    margin: auto;
+  }
+}

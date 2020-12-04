@@ -3,8 +3,6 @@ import './risk-selector.styles.css';
 
 const RiskSelector = (props) => (
   <div className="risk-selector">
-    Please select a Risk Level for your Investment Portfolio
-    <h5>Risk Level Selected: {props.selectedRisk}</h5>
     <ul>
       {
         props.riskValues.map(risk => 

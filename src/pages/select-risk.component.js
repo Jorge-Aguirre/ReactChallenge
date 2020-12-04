@@ -13,16 +13,21 @@ const SelectRiskPage = ({ riskValues, selectedRisk, isDonutChartViewSelected, se
 
   return (
     <div className='content'>
-      <RiskSelector
-        riskValues={riskValues}
-        selectedRisk={selectedRisk}
-        onClick={(i) => selectRisk(i+1)}
-      />
-      {
-        isDonutChartViewSelected ? 
-          <DonutChartPortfolio /> :
-          <RecommendedPortfolio />
-      }
+      Please select a Risk Level for your Investment Portfolio
+      <h5>Risk Level Selected: {selectedRisk}</h5>
+      <div className='panel'>
+        <RiskSelector
+          riskValues={riskValues}
+          selectedRisk={selectedRisk}
+          onClick={(i) => selectRisk(i+1)}
+        />
+        {
+          isDonutChartViewSelected ? 
+            <DonutChartPortfolio /> :
+            <RecommendedPortfolio />
+        }
+      </div>
+
       {
         selectedRisk ?
           <div>

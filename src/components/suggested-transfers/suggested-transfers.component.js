@@ -3,7 +3,7 @@ import{ connect } from 'react-redux';
 
 import './suggested-transfers.styles.css';
 
-const SuggestedTransfer = ({bonds, largeCap, midCap, foreign, smallCap}) => {
+const SuggestedTransfer = ({bonds, largeCap, midCap, foreign, smallCap, customClassName}) => {
   const buildTransfer = () => {
     let transfers = [];
 
@@ -44,13 +44,11 @@ const SuggestedTransfer = ({bonds, largeCap, midCap, foreign, smallCap}) => {
   }
 
   return (
-    <td rowSpan="5" >
-      <div className='movements'>
-        {
-          buildTransfer().map((t, idx) => <li key={idx}>{t}</li>)
-        }
-      </div>
-    </td>
+    <div className={`${customClassName} movements`}>
+      {
+        buildTransfer().map((t, idx) => <li key={idx}>{t}</li>)
+      }
+    </div>
   )
 }
 

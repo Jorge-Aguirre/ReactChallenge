@@ -4,15 +4,15 @@ import SuggestedTransfer from '../suggested-transfers/suggested-transfers.compon
 import './balance-values.styles.css';
 
 const BalanceValues = ({ name, value, handleBlur, renderRowSpan }) => (
-  <tr>
-    <td>{name}</td>
-    <td>
+  <tr className='rebalanced-table-tr'>
+    <td className='rebalanced-table-td'>{name}</td>
+    <td className='rebalanced-table-td'>
       <input 
         type='text'
         onBlur={handleBlur} 
       />
     </td>
-    <td>
+    <td className='rebalanced-table-td'>
       <input 
         type='text'
         className={`${value.difference ? value.difference > 0 ? 'positive' : 'negative' : ''}`}
@@ -21,7 +21,7 @@ const BalanceValues = ({ name, value, handleBlur, renderRowSpan }) => (
         disabled
       />
     </td>
-    <td>
+    <td className='rebalanced-table-td'>
       <input 
         type='text' 
         value={value.newAmount}
@@ -29,7 +29,11 @@ const BalanceValues = ({ name, value, handleBlur, renderRowSpan }) => (
         disabled
       />
     </td>
-    {renderRowSpan ? (<SuggestedTransfer />) : null}
+    {renderRowSpan ? (
+      <td className="rebalanced-table-td suggested-transfers" rowSpan="5" >
+        <SuggestedTransfer customClassName="normal" />
+      </td>
+    ) : null}
   </tr>
 );
 

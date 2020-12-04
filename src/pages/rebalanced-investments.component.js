@@ -6,6 +6,7 @@ import { setIdealConfig, setCurrentBonds, setCurrentLargeCap,
          setCurrentMidCap, setCurrentForeign, setCurrentSmallCap,
          updateValues } from '../redux/rebalanced/rebalanced.actions';
 import BalanceValues from '../components/balance-values/balance-values.component';
+import SuggestedTransfer from '../components/suggested-transfers/suggested-transfers.component';
 
 import './rebalanced-investments.styles.css';
 
@@ -134,9 +135,9 @@ class RebalancedInvestmentsPage extends React.Component {
 
   render () {
     return (
-      <div className='content'>
+      <div className='rebalanced-content'>
           <h5>Risk Level Selected: {this.props.selectedRisk}</h5>
-          <table>
+          <table className='current-risk'>
             <thead>
               <tr>
                 {
@@ -162,35 +163,40 @@ class RebalancedInvestmentsPage extends React.Component {
               </tr>
             </tbody>
           </table>
-          <div className='rebalanced-section'>
-            <h5>Please Enter your current Portfolio</h5>
-            <Button 
-              color={Colors.WARNING}
-              disabled={!this.areCurrentFieldsFilled()}
-              onClick={this.suggestTransfers}
-            >
-              Rebalanced
-            </Button>
-          </div>
+          <div className='wrapper'>
+            <div className='rebalanced-section'>
+              <h5>Please Enter your current Portfolio</h5>
+              <Button 
+                color={Colors.WARNING}
+                disabled={!this.areCurrentFieldsFilled()}
+                onClick={this.suggestTransfers}
+              >
+                Rebalanced
+              </Button>
+            </div>
 
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Current Amount</th>
-                <th>Difference</th>
-                <th>New Amount</th>
-                <th>Recommended Transfers</th>
-              </tr>
-            </thead>
-            <tbody>
-              <BalanceValues name='Bonds $:' value={this.props.bonds} handleBlur={this.handleBondsBlur} renderRowSpan />
-              <BalanceValues name='Large Cap $:' value={this.props.largeCap} handleBlur={this.handleLargeCapBlur}  />
-              <BalanceValues name='Mid Cap $:' value={this.props.midCap} handleBlur={this.handleMidCapBlur}  />
-              <BalanceValues name='Foreign $:' value={this.props.foreign} handleBlur={this.handleForeignBlur}  />
-              <BalanceValues name='Small Cap $:' value={this.props.smallCap} handleBlur={this.handleSmallCapBlur}  />
-            </tbody>
-          </table>
+            <table className='rebalanced-table'>
+              <thead className='rebalanced-table-head'>
+                <tr className='rebalanced-table-tr'>
+                  <th className='rebalanced-table-th'></th>
+                  <th className='rebalanced-table-th'>Current Amount</th>
+                  <th className='rebalanced-table-th'>Difference</th>
+                  <th className='rebalanced-table-th'>New Amount</th>
+                  <th className='rebalanced-table-th'>Recommended Transfers</th>
+                </tr>
+              </thead>
+              <tbody className='rebalanced-table-body'>
+                <BalanceValues name='Bonds $:' value={this.props.bonds} handleBlur={this.handleBondsBlur} renderRowSpan />
+                <BalanceValues name='Large Cap $:' value={this.props.largeCap} handleBlur={this.handleLargeCapBlur}  />
+                <BalanceValues name='Mid Cap $:' value={this.props.midCap} handleBlur={this.handleMidCapBlur}  />
+                <BalanceValues name='Foreign $:' value={this.props.foreign} handleBlur={this.handleForeignBlur}  />
+                <BalanceValues name='Small Cap $:' value={this.props.smallCap} handleBlur={this.handleSmallCapBlur}  />
+                <SuggestedTransfer customClassName="mobile" />
+              </tbody>
+            </table>
+
+            
+          </div>
         </div>
     );
   }

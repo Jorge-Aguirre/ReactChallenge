@@ -5,3 +5,47 @@
 th {
   text-align: center !important;
 }
+
+@media only screen and (max-width: 600px) {
+  .risks-table {
+    height: 65vh;
+    overflow: auto;
+  }
+
+  .risks-table, .risks-table-head, .risks-table-body, .risks-table-th, .risks-table-td, .risks-table-tr {
+    display: block;
+    padding: 2px !important;
+  }
+
+  .risks-table-head .risks-table-tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .risks-table-tr {
+    border: 1px solid #ccc
+  }
+
+  .risks-table-td {
+    border: none;
+    position: relative;
+    padding-left: 70% !important;
+  }
+
+  .risks-table-td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45px;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  .risks-table-td:nth-of-type(1):before { content: "Risk" }
+  .risks-table-td:nth-of-type(2):before { content: "Bonds" }
+  .risks-table-td:nth-of-type(3):before { content: "Large Cap" }
+  .risks-table-td:nth-of-type(4):before { content: "Mid Cap" }
+  .risks-table-td:nth-of-type(5):before { content: "Foreign" }
+  .risks-table-td:nth-of-type(6):before { content: "Small Cap" }
+}

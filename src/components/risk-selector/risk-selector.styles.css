@@ -1,9 +1,11 @@
 .risk-selector {
-  max-width: 960px;
+  max-width: 100%;
   margin: auto;
 }
 
 .risk-selector ul {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -23,4 +25,26 @@
 
 .risk:hover {
   transform: scale(1.25);
+}
+
+@media only screen and (max-width: 600px) {
+  .risk-selector {
+    margin: 0;
+    height: 65vh;
+  }
+  .risk-selector ul {
+    display: inline-grid;
+    grid-template-columns: auto;
+    float: left;
+    height: 65vh;
+  }
+
+  .risk {
+    padding: 0.7vh;
+    margin: 1.3vh;
+  }
+
+  .risk.selected {
+    transform: scale(1.5);
+  }
 }
