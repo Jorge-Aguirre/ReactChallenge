@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import SelectRiskPage from './pages/select-risk.component';
 import RebalancedInvestmentsPage from './pages/rebalanced-investments.component';
 import { connect } from 'react-redux';
@@ -41,7 +41,19 @@ class App extends React.Component {
               />
             } 
           />
-          <Route path='/rebalanced' component={RebalancedInvestmentsPage} />
+          <Route
+            exact
+            path='/rebalanced'
+            render={() => 
+              this.props.selectedRisk ? (
+                console.log(this.props.selectedRisk),
+                <RebalancedInvestmentsPage />
+              ) : (
+                console.log(this.props.selectedRisk),
+                <Redirect to='/' />
+              )
+            }
+          />
         </Switch>
 
 
@@ -58,7 +70,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   riskValues: state.risk.riskValues,
-  isDonutChartViewSelected: state.risk.isDonutChartViewSelected
+  isDonutChartViewSelected: state.risk.isDonutChartViewSelected,
+  selectedRisk: state.risk.selectedRisk
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
