@@ -7,6 +7,7 @@ import { setIdealConfig, setCurrentBonds, setCurrentLargeCap,
          updateValues } from '../redux/rebalanced/rebalanced.actions';
 import BalanceValues from '../components/balance-values/balance-values.component';
 import SuggestedTransfer from '../components/suggested-transfers/suggested-transfers.component';
+import customRound from '../utils.js'
 
 import './rebalanced-investments.styles.css';
 
@@ -98,28 +99,28 @@ class RebalancedInvestmentsPage extends React.Component {
     const smallCapDifference = (sum * this.props.idealConfig.SmallCap / 100) - this.props.smallCap.current;
 
     const Bonds = {
-      difference: Math.round(bondsDifference * 100) / 100,
-      newAmount: parseInt(this.props.bonds.current) + bondsDifference
+      difference: customRound(bondsDifference),
+      newAmount: customRound(parseInt(this.props.bonds.current) + bondsDifference)
     };
 
     const LargeCap = {
-      difference: Math.round(largeCapDifference * 100) / 100,
-      newAmount: parseInt(this.props.largeCap.current) + largeCapDifference
+      difference: customRound(largeCapDifference),
+      newAmount: customRound(parseInt(this.props.largeCap.current) + largeCapDifference)
     }
 
     const MidCap = {
-      difference: Math.round(midCapDifference * 100) / 100,
-      newAmount: parseInt(this.props.midCap.current) + midCapDifference
+      difference: customRound(midCapDifference),
+      newAmount: customRound(parseInt(this.props.midCap.current) + midCapDifference)
     }
 
     const Foreign = {
-      difference: Math.round(foreignDifference * 100) / 100,
-      newAmount: parseInt(this.props.foreign.current) + foreignDifference
+      difference: customRound(foreignDifference),
+      newAmount: customRound(parseInt(this.props.foreign.current) + foreignDifference)
     }
 
     const SmallCap = {
-      difference: Math.round(smallCapDifference * 100) / 100,
-      newAmount: parseInt(this.props.smallCap.current) + smallCapDifference
+      difference: customRound(smallCapDifference),
+      newAmount: customRound(parseInt(this.props.smallCap.current) + smallCapDifference)
     }
 
     const { updateValues } = this.props;

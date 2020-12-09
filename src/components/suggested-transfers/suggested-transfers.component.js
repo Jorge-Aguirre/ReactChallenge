@@ -1,5 +1,6 @@
 import React from 'react';
 import{ connect } from 'react-redux';
+import customRound from '../../utils';
 
 import './suggested-transfers.styles.css';
 
@@ -25,13 +26,13 @@ const SuggestedTransfer = ({bonds, largeCap, midCap, foreign, smallCap, customCl
 
         if (minValue >= maxValue) {
           transferAmount = sorted[sorted.length - 1].value;
-          sorted[0].value = Math.round(((minValue - maxValue) * -1) * 100) / 100;
+          sorted[0].value = customRound((minValue - maxValue) * -1);
           sorted[sorted.length - 1].value = 0;
           sorted.splice(sorted.length - 1, 1);
         } else {
           transferAmount = (sorted[0].value * -1);
           sorted[0].value = 0;
-          sorted[sorted.length - 1].value = Math.round((maxValue - minValue) * 100) / 100;
+          sorted[sorted.length - 1].value = customRound(maxValue - minValue);
           sorted.splice(0, 1)
         }
 

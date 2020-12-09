@@ -46,10 +46,8 @@ class App extends React.Component {
             path='/rebalanced'
             render={() => 
               this.props.selectedRisk ? (
-                console.log(this.props.selectedRisk),
                 <RebalancedInvestmentsPage />
               ) : (
-                console.log(this.props.selectedRisk),
                 <Redirect to='/' />
               )
             }
